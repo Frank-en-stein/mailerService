@@ -1,0 +1,19 @@
+{
+    "name": "mailerservice",
+    "version": "1.0.0",
+    "description": "Mailer microservice based on open source email queue \"Mail-Time\"",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Frank-en-stein/testapp"
+    },
+    "author": "frank-en-stein <smfaisal1648@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.16.1"
+    }
+}
