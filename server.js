@@ -1,16 +1,27 @@
 'use strict';
 
 const express = require('express');
+const MongoClient = require('mongodb').MongoClient;
+const MailTime = require('mail-time');
+const bodyParser = require('body-parser');
 
-// Constants
-const PORT = 80;
-const HOST = '0.0.0.0';
+const serverConstants = require('./src/serverConstants');
 
 // App
 const app = express();
-app.get('/', (req, res) => {
-    res.send('Hello world\n');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+var routes = require('./src/routes/routes');
+routes(app);
+
+MongoClient.connect(serverConstants.MONGO_URL, { useNewUrlParser: true }, (error, client) => {
+    if (error) {
+        console.log(error);
+        return;
+    }
+    const db = client.db(serverConstants.DB_NAME);
+    const mailQueue = new MailTime({ ...serverConstants.MAIL_TIME_SERVER_CONFIG, db });
 });
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+app.listen(serverConstants.PORT, serverConstants.HOST);
+console.log(`Running mailerService on http://${serverConstants.HOST}:${serverConstants.PORT}`);
