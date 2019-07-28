@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const MailTime = require('mail-time');
 
 module.exports = {
-    PORT: 80,
+    PORT: 8080,
     HOST: '0.0.0.0',
     MONGO_URL: 'mongodb://mongo:27017/mailerdb',
     DB_NAME: 'mailerdb',
